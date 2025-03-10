@@ -1,0 +1,108 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+.logocolor{
+  font-size: 56px;
+  font-weight: 900;
+  background: linear-gradient(102.01deg, #FEBE0C 2.91%, #FC3172 25.99%, #8759F2 44.45%, #8759F2 58.3%, #0096FD 76.76%, #26F900 95.23%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.clip-path-custom {
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+}
+.clip-path-custom1 {
+  clip-path: polygon(0 0, 100% 0, 97% 100%, 0% 100%);
+}
+.bgimg{
+  background: './navbarimages/bg.png';
+  width: 100%;
+  height: full;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.gradient-border {
+  position: relative;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+.gradient-btn {
+  position: relative;
+  background: white; 
+  border-radius: 4px;
+  padding: 2px;
+}
+.gradient-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
+  -webkit-mask: 
+    linear-gradient(white 0 0) content-box, 
+    linear-gradient(white 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+.gradient-border1 {
+  background: white;
+  padding: 1px;
+  text-align: center;
+  border-radius: 4px;
+}
+.bgCard{
+  height: 8px;
+  background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
+}
+.gradient-border1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px; 
+  border-radius: 12px;
+  background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
+  -webkit-mask: 
+    linear-gradient(white 0 0) content-box, 
+    linear-gradient(white 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px; 
+  border-radius: 12px;
+  background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
+  -webkit-mask: 
+    linear-gradient(white 0 0) content-box, 
+    linear-gradient(white 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+.gradient-text {
+  font-size: 12px; 
+  font-weight: normal;
+  background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.btn-text {
+  font-size: 14px; 
+  font-weight: 700;
+  background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.texts{
+  background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
+
+}
