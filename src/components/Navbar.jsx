@@ -43,18 +43,34 @@ function Navbar() {
           </div>
         </div>
         <div className=''>
+
+		
           <div className="h-[120px] w-[70%] bg-[url('./navbarimages/bg.png')] bg-cover bg-center bg-no-repeat absolute z-0">
-            <div className='flex gap-10 items-center h-full text-center ml-[6%]'>
-              <Link className='upperace font-bold text-[16px] lg:text-[22px]'>Главная</Link>
-              <Link className='upperace font-bold text-[16px]  lg:text-[22px]'>Кто мы?</Link>
-              <Link className='upperace font-bold text-[16px]  lg:text-[22px]'>Как мы работаем</Link>
-              <Link className='upperace font-bold text-[16px]  lg:text-[22px]'>Контакты</Link>
-              <p className='flex items-center'>
-                <span className='upperace font-bold text-[16px] lg:text-[22px]'>RU</span>
+            <div className='flex gap-10 items-center h-full text-center ml-[15%]'>
+              <div className='h-10 group'>
+                <Link className='upperace font-bold text-[16px] pb-2 lg:text-[22px]'>Главная</  Link>
+                <div className='bgActive hidden group-hover:block  h-1 w-full'></div>
+              </div>
+              <div className='h-10 group'>
+                <Link className='upperace font-bold text-[16px] pb-2 lg:text-[22px]'>Кто мы?</  Link>
+                <div className='bgActive hidden group-hover:block  h-1 w-full'></div>
+              </div>
+              <div className='h-10 group'>
+                <Link className='upperace font-bold text-[16px] pb-2 lg:text-[22px]'>Как мы работаем</  Link>
+                <div className='bgActive hidden group-hover:block  h-1 w-full'></div>
+              </div>
+              <div className='h-10 group '>
+                <Link className='upperace font-bold  text-[16px] pb-2 lg:text-[22px]'>Контакты</  Link>
+                <div className='bgActive  hidden group-hover:block  h-1 w-full'></div>
+              </div>
+              <p className='flex justify-center items-center'>
+                <span className='upperace font-bold text-[16px] mb-1 lg:text-[22px]'>RU</span>
               </p>
-              <img src="./navbarimages/bottom.svg" className='-ml-4' alt="" />
+              <img src="./navbarimages/bottom.svg" className='-ml-8' alt="" />
             </div>
           </div>
+
+		
         </div>
         <div className='flex max-w-[80%] justify-between gap-64 items-center mt-36'>
           <p className='flex gap-1'>
