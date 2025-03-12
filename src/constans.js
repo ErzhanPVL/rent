@@ -84,3 +84,39 @@ export const arr=[
         count:999
     }
 ]
+export const products = [
+    {
+      id: 1,
+      img: "./stol/1.svg",
+      title: "Amsterdam Black",
+      price: "1700 ₽",
+      oldPrice: "1500 ₽ со второго дня",
+    },
+    {
+      id: 2,
+      img: "./stol/1.svg",
+      title: "Amsterdam White",
+      price: "1800 ₽",
+      oldPrice: "1600 ₽ со второго дня",
+    },
+    {
+      id: 3,
+      img: "./stol/1.svg",
+      title: "Amsterdam Grey",
+      price: "1750 ₽",
+      oldPrice: "1550 ₽ со второго дня",
+    },
+    {
+      id: 4,
+      img: "./stol/1.svg",
+      title: "Amsterdam Blue",
+      price: "1850 ₽",
+      oldPrice: "1650 ₽ со второго дня",
+    },
+  ];
+export const images=[
+    './stol/stol1.svg',
+    './stol/stol2.svg',
+    './stol/stol3.svg',
+    './stol/stol4.svg',
+]

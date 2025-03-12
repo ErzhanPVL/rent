@@ -4,6 +4,7 @@
 * {
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 .logocolor{
   font-size: 56px;
@@ -62,6 +63,58 @@
   height: 8px;
   background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
 }
+
+.card {
+  width: 160px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 2px solid #C4C4C4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.3s ease-in-out;
+  margin-bottom: 24px;
+}
+
+.card:hover {
+  border: 2px solid transparent;
+  border-radius: 4px; /* Border radius saqlanadi */
+  background: linear-gradient(white, white) padding-box, 
+              linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #0096FD, #26F900) border-box;
+}
+
+.card1 {
+  width: 272px;
+  height: 386px;
+  max-width: 300px; 
+  margin: 0 auto;
+  padding: 24px; 
+  padding-bottom: 0; 
+  border-radius: 8px;
+  border: 2px solid #C4C4C4; 
+  transition: border 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  position: relative;
+  background: white;
+}
+
+@media (min-width: 768px) { /* md: */
+  .card1 {
+    width: 300px;
+  }
+}
+
+.card1:hover {
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box, 
+              linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #0096FD, #26F900) border-box;
+}
+
+.bgActive{
+  width: full;
+  height: 4px;
+  background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
+}
 .gradient-border1::before {
   content: "";
   position: absolute;
@@ -105,4 +158,20 @@
 .texts{
   background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
 
+}
+
+.productCard {
+  width: 271px;
+  height: 477px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px; 
+  padding-right: 24px; 
+  padding-top: 31px; 
+  padding-bottom: 20px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.productCard:hover{
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.15);
+ 
 }
