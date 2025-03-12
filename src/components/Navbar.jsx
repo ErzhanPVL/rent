@@ -48,7 +48,7 @@ function Navbar() {
               <Link className='upperace font-bold text-[16px] lg:text-[22px]'>Главная</Link>
               <Link className='upperace font-bold text-[16px]  lg:text-[22px]'>Кто мы?</Link>
               <Link className='upperace font-bold text-[16px]  lg:text-[22px]'>Как мы работаем</Link>
-              <Link className='upperace font-bold text-[16px]  lg:text-[22px]'>Как мы работаем</Link>
+              <Link className='upperace font-bold text-[16px]  lg:text-[22px]'>Контакты</Link>
               <p className='flex items-center'>
                 <span className='upperace font-bold text-[16px] lg:text-[22px]'>RU</span>
               </p>
@@ -72,14 +72,14 @@ function Navbar() {
             <img className="w-8 h-8" src="./navbarimages/user.svg" alt="" />
             <img className="w-8 h-8" src="./navbarimages/heartz.svg" alt="" />
 
-            
+            <Link to="/korzina" className='flex flex-col justify-center'>
             <div className='flex flex-col justify-center'>
                 <div className='flex flex-col justify-center relative'>
                     <img src="./footer/cart.svg" className='w-8 md:w-9  mt-1 bg-transparent z-10 mb-1.5 h-8' alt="" />
                     <p className='absolute text-[10px] bottom-4 ml-3 gradient-border1'>1234</p>
                 </div>
-               
             </div>
+	    </Link>
 </div>
 
         </div>
