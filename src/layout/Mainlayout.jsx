@@ -10,7 +10,7 @@ function Mainlayout() {
         <Navbar/>
       </header>
       <main>
-        <div className='flex max-w-[1440px] gap-14 px-0 lg:px-10'>
+        <div className='flex max-w-[1440px] mx-auto gap-2 px-0 lg:px-10'>
             <div className='hidden mr-2 lg:block'>
                 <Sidebar/>
             </div>
