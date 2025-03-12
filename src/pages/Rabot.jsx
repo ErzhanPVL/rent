@@ -1,12 +1,61 @@
 import React, { useState } from 'react'
 import { IoMdClose } from "react-icons/io";
+import { Link } from 'react-router-dom';
 function Rabot() {
   const [openModal,setOpenModal]=useState(false)
+  const [oncount,setoncount]=useState(false)
+  const [selectedCards, setSelectedCards] = useState([]);
   const onModal=()=>{
     setOpenModal(!openModal)
   }
+  const [data,setData]=useState([
+    {
+      id:1,
+      url:'./stol/1.svg'
+    },
+    {
+      id:2,
+      url:'./stol/2.svg'
+    },
+    {
+      id:3,
+      url:'./stol/3.svg'
+    },
+    {
+      id:4,
+      url:'./stol/1.svg'
+    },
+    {
+      id:5,
+      url:'./stol/2.svg'
+    },
+    {
+      id:6,
+      url:'./stol/3.svg'
+    },
+    {
+      id:7,
+      url:'./stol/1.svg'
+    },
+    {
+      id:8,
+      url:'./stol/2.svg'
+    },
+    {
+      id:9,
+      url:'./stol/3.svg'
+    },
+    ])
+    const Onsetoncount = (id) => {
+      if (selectedCards.includes(id)) {
+        setSelectedCards(selectedCards.filter((item) => item !== id)); 
+        // setoncount(!oncount)
+      } else {
+        setSelectedCards([...selectedCards, id]); 
+      }
+    };
   return (
-    <div className='mt-10 w-full px-5'>
+    <div className='mt-10 w-full max-w-[1200px] px-5'>
        <div className='w-full'>
            <p className='text-[#1A1A1A80] text-[12px] mb-6'> Главная  •  Каталог  •  Столы</p>
           <p className='text-[#161616] text-[22px] font-bold mb-8'>Аренда столов в Санкт-Петербурге</p>
@@ -109,157 +158,53 @@ function Rabot() {
 
               <p className='text-[16px] text-[#1A1A1A] font-bold mb-[34px]'>Вы недавно
               смотрели:</p>
-              <div className='w-40 h-24 rounded-[4px] flex items-center justify-center border border-[#C4C4C4] mb-4'>
+              <div className='card'>
                  <img src="./stol/photo.svg" alt="" />
               </div>
-              <div className='w-40 h-24 rounded-[4px] flex items-center justify-center  mb-4'>
+              <div className='card'>
               <img src="./stol/kreslo.svg" alt="" />
               </div>
-              <div className='w-40 h-24 rounded-[4px] flex items-center justify-center border border-[#C4C4C4] mb-4'>
+              <div className='card'>
                  <img src="./stol/photo.svg" alt="" />
               </div>
-              <div className='w-40 h-24 rounded-[4px] flex items-center justify-center  border border-[#C4C4C4]   mb-4'>
+              <div className='card'>
               <img src="./stol/kreslo.svg" alt="" />
               </div>
           </div>
-          {!openModal &&<div className='lg:w-[80%] w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-10 gap-2  justify-center'>
-            <div className='w-[271px] h-[477px]  mx-auto  px-6 pt-[31px] pb-[20px]'>
-                <div className='w-full flex justify-between items-center mb-[43px]'>
-                   <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
-                   <img src="./stol/heartz.svg" alt="" />
-                </div>
-                <img src="./stol/1.svg" className='mb-[68px]' alt="" />
-                <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
-                 <p className='flex items-center gap-4'>
-                  <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
-                  <img src="./stol/answer.svg" alt="" />
-                 </p>
-                 <p className='font-normal text-[12px] mb-9'>1500 ₽ со второго дня</p>
-                 <button className='text-sm font-bold w-full h-10 flex items-center justify-center border-2 rounded-[4px] text-[#1A1A1A]'>Арендовать</button>
-            </div> 
-            <div className='w-[271px] relative mx-auto  h-[497px]  px-6 pt-[31px] pb-[20px]'>
-                <div className='w-full flex justify-between items-center mb-[43px]'>
-                   <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
-                   <img src="./stol/heartz.svg" alt="" />
-                </div>
-                <img src="./stol/2.svg" className='mb-[68px]' alt="" />
-                <img src="./amstersam/promo.svg" className='absolute top-52 left-40' alt="" />
-                <img src="./stol/colors.svg" className='absolute top-64 left-5 w-8 ' alt="" />
-                <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
-                 <p className='flex items-center gap-4'>
-                  <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
-                  <img src="./stol/answer.svg" alt="" />
-                 </p>
-                 <p className='font-normal text-[12px] mb-11'>1500 ₽ со второго дня</p>
-                 <div className="w-[208px] text-[#8759F2] font-bold   h-14 flex bg-[url('./home/Union.svg')] bg-cover justify-center py-2 ">
-                   Арендовать
-                 </div>
-            </div>
-            <div className='w-[271px] h-[477px] mx-auto  px-6 pt-[31px] pb-[20px]'>
-                <div className='w-full flex justify-between items-center mb-[43px]'>
-                   <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
-                   <img src="./stol/heartz.svg" alt="" />
-                </div>
-                <img src="./stol/3.svg" className='mb-[68px]' alt="" />
-                <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
-                 <p className='flex items-center gap-4'>
-                  <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
-                  <img src="./stol/answer.svg" alt="" />
-                 </p>
-                 <p className='font-normal text-[12px] mb-9'>1500 ₽ со второго дня</p>
-                 <button className='text-sm font-bold w-full h-10 flex items-center justify-center border-2 rounded-[4px] text-[#1A1A1A]'>Арендовать</button>
-            </div>
-            <div className='w-[271px] h-[477px] mx-auto  px-6 pt-[31px] pb-[20px]'>
-                <div className='w-full flex justify-between items-center mb-[43px]'>
-                   <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
-                   <img src="./stol/heartz.svg" alt="" />
-                </div>
-                <img src="./stol/1.svg" className='mb-[68px]' alt="" />
-                <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
-                 <p className='flex items-center gap-4'>
-                  <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
-                  <img src="./stol/answer.svg" alt="" />
-                 </p>
-                 <p className='font-normal text-[12px] mb-9'>1500 ₽ со второго дня</p>
-                 <button className='text-sm font-bold w-full h-10 flex items-center justify-center border-2 rounded-[4px] text-[#1A1A1A]'>Арендовать</button>
-            </div>
-            <div className='w-[271px] relative mx-auto h-[477px]  px-6 pt-[31px] pb-[20px]'>
-                <div className='w-full flex justify-between items-center mb-[43px]'>
-                   <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
-                   <img src="./stol/heartz.svg" alt="" />
-                </div>
-                <img src="./stol/2.svg" className='mb-[68px]' alt="" />
-                <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
-                 <p className='flex items-center gap-4'>
-                  <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
-                  <img src="./stol/answer.svg" alt="" />
-                 </p>
-                 <p className='font-normal text-[12px] mb-9'>1500 ₽ со второго дня</p>
-                 <button className='text-sm font-bold w-full h-10 flex items-center justify-center border-2 rounded-[4px] text-[#1A1A1A]'>Арендовать</button>
-                 
-            </div>
-            <div className='w-[271px] relative  mx-auto h-[477px]  px-6 pt-[31px] pb-[20px]'>
-                <div className='w-full flex justify-between items-center mb-[43px]'>
-                   <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
-                   <img src="./stol/heartz.svg" alt="" />
-
-                </div>
-                <img src="./stol/3.svg" className='mb-[68px]' alt="" />
-                 <img src="./home/12.svg" alt="" className='absolute top-48 left-44' />
-                <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
-                 <p className='flex items-center gap-4'>
-                  <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
-                  <img src="./stol/answer.svg" alt="" />
-                 </p>
-                 <p className='font-normal text-[12px] mb-9'>1500 ₽ со второго дня</p>
-                 <button className='text-sm font-bold w-full h-10 flex items-center justify-center border-2 rounded-[4px] text-[#1A1A1A]'>Арендовать</button>
-            </div>
-            <div className='w-[271px] h-[477px] mx-auto px-6 pt-[31px] pb-[20px]'>
-                <div className='w-full flex justify-between items-center mb-[43px]'>
-                   <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
-                   <img src="./stol/heartz.svg" alt="" />
-                </div>
-                <img src="./stol/1.svg" className='mb-[68px]' alt="" />
-                <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
-                 <p className='flex items-center gap-4'>
-                  <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
-                  <img src="./stol/answer.svg" alt="" />
-                 </p>
-                 <p className='font-normal text-[12px] mb-9'>1500 ₽ со второго дня</p>
-                 <button className='text-sm font-bold w-full h-10 flex items-center justify-center border-2 rounded-[4px] text-[#1A1A1A]'>Арендовать</button>
-            </div>
-            <div className='w-[271px] relative mx-auto h-[477px]  px-6 pt-[31px] pb-[20px]'>
-                <div className='w-full flex justify-between items-center mb-[43px]'>
-                   <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
-                   <img src="./stol/heartz.svg" alt="" />
-                </div>
-                <img src="./stol/2.svg" className='mb-[68px]' alt="" />
-              
-               
-                <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
-                 <p className='flex items-center gap-4'>
-                  <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
-                  <img src="./stol/answer.svg" alt="" />
-                 </p>
-                 <p className='font-normal text-[12px] mb-9'>1500 ₽ со второго дня</p>
-                 <button className='text-sm font-bold w-full h-10 flex items-center justify-center border-2 rounded-[4px] text-[#1A1A1A]'>Арендовать</button>
-                 
-            </div>
-            <div className='w-[271px] h-[477px] mx-auto  px-6 pt-[31px] pb-[20px]'>
-                <div className='w-full flex justify-between items-center mb-[43px]'>
-                   <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
-                   <img src="./stol/heartz.svg" alt="" />
-                </div>
-                <img src="./stol/3.svg" className='mb-[68px]' alt="" />
-                <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
-                 <p className='flex items-center gap-4'>
-                  <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
-                  <img src="./stol/answer.svg" alt="" />
-                 </p>
-                 <p className='font-normal text-[12px] mb-9'>1500 ₽ со второго дня</p>
-                 <button className='text-sm font-bold w-full h-10 flex items-center justify-center border-2 rounded-[4px] text-[#1A1A1A]'>Арендовать</button>
-            </div>
-
+          {!openModal &&<div className='lg:w-[819px] w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-10 gap-2 justify-center'>
+            {data && data.map((item)=>{
+              return <Link to={'/amstersam'}>
+                         <div className='w-[251px] group relative mx-auto cursor-pointer  h-[477px]  px-6 pt-[31px] pb-[20px]'>
+              <div className='w-full flex justify-between items-center mb-[43px]'>
+                 <p className='text-[#1A1A1A] text-[12px] '>Арт.: 0046</p>
+                 <img src="./stol/heartz.svg" alt="" />
+              </div>
+              <img src={item.url} className='mb-[68px]' alt="" />
+              {!oncount && <div>
+                <img src="./amstersam/promo.svg" className='absolute hidden  group-hover:block top-52 left-40' alt="" />
+                <img src="./stol/colors.svg" className='hidden group-hover:block absolute top-64 left-5 w-8 ' alt="" />
+                </div>}
+              <p className='text-[16px] font-bold text-[#1A1A1A] mb-2'>Amsterdam Black</p>
+               <p className='flex items-center gap-4'>
+                <span className='text-[24px] text-[#1A1A1A] font-[300]'>1700 ₽</span>
+                <img src="./stol/answer.svg" alt="" />
+               </p>
+               <p className='font-normal text-[12px] group-hover:mb-6 mb-9'>1500 ₽ со второго дня</p>
+               <button className='text-sm group-hover:hidden font-bold w-full h-10 flex items-center justify-center border-2 rounded-[4px] text-[#1A1A1A]'>Арендовать</button>
+               {!oncount && <div onClick={()=>Onsetoncount(item.id)} className="w-[208px]  hidden cursor-pointer group-hover:flex justify-center items-center h-14 bg-[url('./home/Union.svg')]  bg-cover">
+                    <p className='btn-text text-center mb-3'>Арендовать</p>
+               </div>}
+               {oncount && <div className="w-full hidden group-hover:flex items-center gap-12 justify-center h-12 bg-[url('./korzina/btn.svg')] bg-cover">
+                          <img src="./korzina/decr.svg" alt="" className='cursor-pointer' />
+                          <span className='text-[#8759F2] text-[16px] font-bold'>30</span>
+                          <img src="./korzina/incremant.svg" alt="" className='cursor-pointer' />
+                </div>}
+                {oncount && <img src='./home/12.svg' className='absolute top-48 left-44'/> }
+          </div>
+              </Link>
+            })}
+            
+           
           </div> }
         </div>
        

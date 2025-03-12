@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Catalog() {
   return (
@@ -18,10 +19,12 @@ function Catalog() {
             <img src="./navbarimages/3.svg" className='w-7 cursor-pointer' alt="" />
             <span className='text-[16px] text-[500]'>Свое производство</span>
         </div>
-        <div className='flex items-center gap-2 w-[272px] h-[54px] rounded-[8px] bg-[#F9F9F9] px-4 mb-2 '>
+        <Link to={'/rabotaem'}>
+         <div className='flex items-center group gap-2 w-[272px] h-[54px] rounded-[8px] bg-[#F9F9F9] px-4 mb-2 '>
                 <img src="./navbarimages/4.svg" className='w-8 cursor-pointer' alt="" />
-                <span className='text-[16px] text-[500]'>Столы</span>
+                <span className='text-[16px] font-normal group-hover:font-bold group-hover:text-[#FC3172] text-[500]'>Столы</span>
         </div>
+          </Link>
 
         <div className='flex items-center gap-2 w-[272px] h-[54px] rounded-[8px] bg-[#F9F9F9] px-4 mb-2 '>
                 <img src="./navbarimages/5.svg" className='w-8 cursor-pointer' alt="" />
@@ -31,10 +34,12 @@ function Catalog() {
             <img src="./navbarimages/6.svg" className='w-10' alt="" />
             <span className='text-[16px] text-[500]'>Мягкая мебель</span>
         </div>
-        <div className='flex items-center gap-2 w-[272px] h-[54px] rounded-[8px] bg-[#F9F9F9] px-4 mb-2  '>
+        <Link to={'/amstersam'}>
+            <div className='flex items-center group gap-2 w-[272px] h-[54px] rounded-[8px] bg-[#F9F9F9] px-4 mb-2  '>
             <img src="./navbarimages/7.svg" className='w-10' alt="" />
-            <span className='text-[16px] text-[500]'>Стойки</span>
+            <span className='text-[16px] font-normal group-hover:font-bold group-hover:text-[#FC3172] text-[500]'>Стойки</span>
         </div>
+        </Link>
         <div className='flex items-center  gap-2 w-[272px] h-[54px] rounded-[8px] bg-[#F9F9F9] px-4 mb-2  '>
             <img src="./navbarimages/8.svg" className='w-10' alt="" />
             <span className='text-[16px] text-[500]'>Для детей</span>
