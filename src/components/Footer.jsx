@@ -26,7 +26,7 @@ const Footer = () => {
                             <img src="./footer/Facebook.svg" className='w-12 ' alt="" />
                             <img src="./footer/instagram.svg" className='w-12 ' alt="" />
                             <img src="./footer/telegram.svg" className='w-12 ' alt="" />
-                            <img src="./footer/phone.svg" className='w-12 ' alt="" />
+                            <img src="./footer/whatsapp.png" className='w-12 ' alt="" />
                         </div>
                         <div>
                             <p>Контакты</p>
