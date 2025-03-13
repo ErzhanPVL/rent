@@ -10,7 +10,7 @@ function Navbar() {
   }
   return (
     <div>
-      <div className='w-full mx-auto hidden lg:flex'>
+      <div className='max-w-[1440px] mx-auto hidden lg:flex'>
         <div className='bg-[#1A1A1A] w-[608px] pb-2.5 pl-[88px] pt-3 pr-7 clip-path-custom z-10'>
           <div className='flex items-center gap-16'>
             <div>
