@@ -54,9 +54,12 @@
   mask-composite: exclude;
 }
 .gradient-border1 {
-  background: white;
-  padding: 1px;
+  /* background: white; */
+  padding: 1px 6px;
+  background-color: white;
   text-align: center;
+  /* transform: translateY(13px); */
+  z-index: 9999999999;
   border-radius: 4px;
 }
 .bgCard{
@@ -118,8 +121,10 @@
 .gradient-border1::before {
   content: "";
   position: absolute;
+  /* z-index: 9999999999; */
   inset: 0;
   padding: 2px; 
+  /* background-color: white; */
   border-radius: 12px;
   background: linear-gradient(to right, #FEBE0C, #FC3172, #8759F2, #8759F2,#0096FD,#26F900);
   -webkit-mask: 
@@ -174,4 +179,10 @@
 .productCard:hover{
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.15);
  
+}
+
+@media (max-width: 500px) {
+  .gradient-border1 {
+    transform: translateY(14px);
+  }
 }
