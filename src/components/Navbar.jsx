@@ -89,12 +89,10 @@ function Navbar() {
             <img className="w-8 h-8" src="./navbarimages/heartz.svg" alt="" />
 
             <Link to="/korzina" className='flex flex-col justify-center'>
-            <div className='flex flex-col justify-center'>
-                <div className='flex flex-col justify-center relative'>
-                    <img src="./footer/cart.svg" className='w-8 md:w-9  mt-1 bg-transparent z-10 mb-1.5 h-8' alt="" />
-                    <p className='absolute text-[10px] bottom-4 ml-3 gradient-border1'>1234</p>
-                </div>
-            </div>
+              <div className='flex flex-col justify-center relative pr-3'>
+                <img src="./footer/cart.svg" className='w-8  mt-1 bg-transparent z-10 mb-1.5 h-8' alt="" />
+                <p className='absolute bg-white text-[10px] left-4 sm:bottom-6 gradient-border1'>123</p>
+              </div>
 	    </Link>
 </div>
 
