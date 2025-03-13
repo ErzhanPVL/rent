@@ -72,7 +72,7 @@ function Navbar() {
 
 		
         </div>
-        <div className='flex max-w-[80%] justify-between gap-64 items-center mt-36'>
+        <div className='flex max-w-[80%] justify-around items-center mt-36'>
           <p className='flex gap-1'>
             <img src="./navbarimages/email.svg" className='w-10 ' alt="" />
             <span className='text-[22px] pr-14 text-[300] mb-2 text-[rgba(26, 26, 26, 1)]'>order@mail.ru</span>
