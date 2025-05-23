@@ -17,7 +17,7 @@ const Footer = () => {
                         </div>
                      <div>
                         <p className='text-[22px] font-normal mt-2'>+7 (888) 888-88-88</p>
-                        <p className='text-[16px] font-normal'>e-mail: order@mail.ru</p>
+                        <p className='text-[16px] font-normal'>e-mail: order@test.ru</p>
                         </div>
                     </div>
 
@@ -58,9 +58,9 @@ const Footer = () => {
             <div className='flex flex-col justify-center'>
                 <div className='flex flex-col justify-center relative'>
                     <img src="./footer/cart.svg" className='w-8 md:w-9 mt-1 bg-transparent z-10 mb-1.5 h-[29px]' alt="" />
-                    <p className='absolute text-[10px] bottom-9 ml-3 gradient-border1'>1234</p>
+                    <p className='absolute text-[10px] bottom-9 ml-2 gradient-border1'>1234</p>
                 </div>
-                 <p className='text-[#1A1A1A80]  text-[12px] -mt-4  md:text-[16px]'>Корзина</p>
+                 <p className='text-[#1A1A1A80]  text-[12px] -mt-1  md:text-[16px]'>Корзина</p>
             </div>
          </div >
     </div>

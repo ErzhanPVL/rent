@@ -3,10 +3,13 @@ import { createBrowserRouter,Route,RouterProvider } from 'react-router-dom'
 import Mainlayout from './layout/Mainlayout'
 // import Router from 'express/lib/router'
 import Home from './pages/Home'
-import Rabot from './pages/Rabot'
+import Rabot from './pages/Products'
 import Amstersam from './pages/Amstersam'
 import Korzina from './pages/Korzina'
-import Catalog from './pages/Catalog'
+// import Catalog from './pages/Catalog'
+import AddAdminProduct from './pages/AddAdminProduct'
+import { ToastContainer } from 'react-toastify'
+import Product from './pages/Product'
 const App = () => {
   const router=createBrowserRouter([
     {
@@ -22,7 +25,7 @@ const App = () => {
          element:<Rabot/>
         },
         {
-          path:'/amstersam',
+          path:'/amstersam/:id',
           element:<Amstersam/>
         },
         {
@@ -30,13 +33,21 @@ const App = () => {
           element:<Korzina/>
         },
         {
-          path:'/catalog',
-          element:<Catalog/>
+          path:'/admin',
+          element:<AddAdminProduct/>
+        },
+        {
+          path:'/product/:id',
+          element:<Product/>
         }
       ]
+      
     }
   ])
-  return <RouterProvider router={router}/>
-}
+  return <>
+          <RouterProvider router={router}/>
+          <ToastContainer position="top-right" autoClose={3000} />
+        </>
+  }
 
 export default App

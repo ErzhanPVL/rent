@@ -6,7 +6,7 @@ function Catalog() {
     <div>
         <div className='w-[350px] px-6 lg:hidden'>
         <div className='flex items-center mt-10 gap-2 w-[272px] h-[54px] rounded-[8px] bg-[#F9F9F9] px-4 mb-2 '>
-            <img src="./navbarimages/1.svg" className='w-10 cursor-pointer' alt="" />
+            <img src="/navbarimages/1.svg" className='w-10 cursor-pointer' alt="" />
             <span className='text-[16px] text-[500]'>Акции</span>
         </div>
 
