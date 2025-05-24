@@ -24,7 +24,7 @@ const Footer = () => {
                     <div className='w-[50%] flex gap-10 mt-3'>
                         <div className='flex gap-4'>
                             <img src="./footer/Facebook.svg" className='w-12 ' alt="" />
-                            <img src="./footer/instagram.svg" className='w-12 ' alt="" />
+                       
                             <img src="./footer/telegram.svg" className='w-12 ' alt="" />
                             <img src="./footer/whatsapp.png" className='w-12 ' alt="" />
                         </div>
