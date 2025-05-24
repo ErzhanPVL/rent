@@ -31,7 +31,7 @@ function Navbar() {
               </p>
               <div className='flex gap-2'>
                 <img className='w-6 h-6' src={img1} alt="" />
-                <img className='w-6 h-6' src={img2} alt="" />
+               
                 <img className='w-6 h-6' src={img3} alt="" />
                 <img className='w-6 h-6' src={img4} alt="" />
               </div>
@@ -122,7 +122,7 @@ function Navbar() {
 
       {openMenu && <div className='w-full absolute block lg:hidden z-10 bg-[#F9F9F9] p-6'>
         <div className='flex flex-col gap-y-2 mb-[70px]'>
-          <Link to={'/catalog'} className='text-[16px] cursor-pointer text-[#1A1A1A] font-bold uppercase pb-3 border-b border-[#000000] w-full' style={{ borderBottomColor: 'rgba(0, 0, 0, 0.1)' }}>Каталог</Link>
+          <Link to={'/rabotaem'} className='text-[16px] cursor-pointer text-[#1A1A1A] font-bold uppercase pb-3 border-b border-[#000000] w-full' style={{ borderBottomColor: 'rgba(0, 0, 0, 0.1)' }}>Каталог</Link>
           <p className='text-[16px] text-[#1A1A1A] font-bold uppercase pb-3 border-b border-[#000000] border-opacity-10 w-full ' style={{ borderBottomColor: 'rgba(0, 0, 0, 0.1)' }}> Главная</p>
           <p className='text-[16px] text-[#1A1A1A] font-bold uppercase pb-3 border-b border-[#000000] border-opacity-10 w-full' style={{ borderBottomColor: 'rgba(0, 0, 0, 0.1)' }}>Кто мы?</p>
           <p className='text-[16px] text-[#1A1A1A] font-bold uppercase pb-3 border-b border-[#000000] border-opacity-10 w-full' style={{ borderBottomColor: 'rgba(0, 0, 0, 0.1)' }}>Как мы работаем</p>
@@ -133,13 +133,13 @@ function Navbar() {
         <p className='text-[16px] font-normal mb-6'>order@test.ru</p>
         <div className='w-full h-[1px] bg-[#000000] mb-4'> </div>
         <p className='flex gap-3 mb-4'>
-          <span>Санкт-Петербург</span>
+          <span>Москва</span>
           <img src="./home/right1.svg" alt="" />
         </p>
         <div className='w-full flex justify-between items-center'>
           <div className='flex gap-2'>
             <img src="./footer/Facebook.svg" className='w-6 h-6' alt="" />
-            <img src="./footer/instagram.svg" className='w-6 h-6' alt="" />
+          
             <img src="./footer/telegram.svg" className='w-6 h-6' alt="" />
             <img src="./footer/phone.svg" className='w-6 h-6' alt="" />
           </div>
