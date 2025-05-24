@@ -150,7 +150,7 @@ const AddAdminProduct = () => {
           <input
             type="number"
             name="stock"
-            placeholder="Акция"
+            placeholder="Цена со второго дня"
             className="input-style md:py-3 py-2 px-5 rounded-md border-2 border-[#4a6cc9] focus:border-[#60a5fa] w-full"
             value={formData.stock}
             onChange={handleChange}
@@ -206,7 +206,7 @@ const AddAdminProduct = () => {
           />
           <textarea
             name="article"
-            placeholder="Артикл"
+            placeholder="Артикул"
             className="input-style h-32 py-2 md:py-3 px-5 rounded-md border-2 border-[#4a6cc9] focus:border-[#60a5fa] w-full"
             value={formData.article}
             onChange={handleChange}
