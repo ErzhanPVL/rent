@@ -3,7 +3,7 @@ import { useFetch } from '../services/servis'
 function Home() {
     return (
         <div className='lg:mt-10 max-w-[1180px]'>
-            <div className="mb-10 h-[576px] bg-[url('./home/homebg.svg')] bg-center bg-cover pt-10 pl-10 pr-8">
+            <div className="mb-10 h-[576px] bg-[url('././public/home/homebg.svg')] bg-center bg-cover pt-10 pl-10 pr-8">
                 <div className='w-full lg:flex h-full justify-between '>
                     <div className='h-full'>
                         <h3 className='lg:text-[56px] lg:h-[200px] text-[22px]  font-extrabold uppercase lg:leading-16 '>
