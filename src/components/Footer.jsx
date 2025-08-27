@@ -8,8 +8,8 @@ const Footer = () => {
                 <div className='flex gap-[100px] items-start'>
                     <div className='w-[50%] flex items-start gap-[108px]'>
                      <div>
-                        <img src="./footer/logo.svg" alt="" />
-                        <p className='tracking-[0.2em] -mt-2 text-[#000000] mb-1 ml-10'>every day</p>
+                        <h2 className='text-[40px] font-extrabold uppercase text-[#000000]'>Logo</h2>
+                        <p className='tracking-[0.2em] -mt-2 ml-4 text-[#000000] mb-1'>very da</p>
                         <p>
                             <span className='text-[10px] font-normal mr-4 leading-6 opacity-30'>© 2018-2025</span>
                             <span className='text-[10px] font-normal leading-6 opacity-30'>Все права защищены</span>
@@ -24,7 +24,7 @@ const Footer = () => {
                     <div className='w-[50%] flex gap-10 mt-3'>
                         <div className='flex gap-4'>
                             <img src="./footer/Facebook.svg" className='w-12 ' alt="" />
-                       
+                            <img src="./footer/instagram.svg" className='w-12 ' alt="" />
                             <img src="./footer/telegram.svg" className='w-12 ' alt="" />
                             <img src="./footer/whatsapp.png" className='w-12 ' alt="" />
                         </div>

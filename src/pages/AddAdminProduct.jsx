@@ -10,33 +10,58 @@ const AddAdminProduct = () => {
     price: null,
     stock: null,
     category: "",
-    image1: null,
-    image2: null,
-    image3: null,
-    image4: null,
-    used_outside: null,
-    // size: '',
+    used_outside: true,
     width: "",
     height: "",
     radius: "",
+    only_under_cover: null,
+    journalish: false,
+    bar_and_cocktailish: false,
+    standard: false,
+    folding_furniture: false,
+    led_furniture: false,
     color: "",
     shape: "Круг",
     article: "",
   });
-  console.log(formData);
-  const handleChange = (e) => {
-    const { name, type, value, files } = e.target;
 
-    if (name.startsWith("image")) {
+  const handleChange = (e) => {
+    const { name, type, value, checked, files } = e.target;
+
+    if (files && files.length > 0) {
+      // Handle file inputs like 'image', 'cover'
       setFormData({ ...formData, [name]: files[0] });
-    } else if (type === "radio" && name === "used_outside") {
-      setFormData({ ...formData, [name]: value === "true" });
+    } else if (type === "checkbox") {
+      // Handle boolean checkboxes
+      setFormData({ ...formData, [name]: checked });
+    } else if (type === "radio") {
+      if (name === "used_outside") {
+        // Specific radio field parsed as boolean
+        setFormData({ ...formData, [name]: !formData.used_outside });
+      } else {
+        // Other radios (like only_under_cover)
+        setFormData({ ...formData, [name]: value === "true" });
+      }
     } else if (type === "number") {
+      // Convert number fields to actual numbers
       setFormData({ ...formData, [name]: value === "" ? "" : Number(value) });
     } else {
+      // Default case for text, textarea, etc.
       setFormData({ ...formData, [name]: value });
     }
   };
+
+  const [fileInputs, setFileInputs] = useState([0]); // unique IDs for each input
+  const [files, setFiles] = useState({});
+
+  const handleFileChange = (id, file) => {
+    setFiles((prev) => ({ ...prev, [id]: file }));
+  };
+
+  const addFileInput = () => {
+    setFileInputs((prev) => [...prev, Date.now()]);
+  };
+
   const handleSubmit = async () => {
     setLoading(true);
     const {
@@ -45,10 +70,6 @@ const AddAdminProduct = () => {
       price,
       stock,
       category,
-      image1,
-      image2,
-      image3,
-      image4,
       height,
       width,
       radius,
@@ -62,7 +83,6 @@ const AddAdminProduct = () => {
       price <= 0 ||
       stock < 0 ||
       !category ||
-      !image1 ||
       !color ||
       !width ||
       !height ||
@@ -73,27 +93,36 @@ const AddAdminProduct = () => {
       setLoading(false);
       return;
     }
-
     const form = new FormData();
+
+    Object.values(files).forEach((file) => {
+      if (file) {
+        form.append("images", file); // 'images' will be an array
+      }
+    });
+
     form.append("name", name);
     form.append("description", description);
     form.append("price", price);
     form.append("stock", stock);
     form.append("category", category);
-    form.append("image1", image1);
-    if (image2) form.append("image2", image2);
-    if (image3) form.append("image3", image3);
-    if (image4) form.append("image4", image4);
-    form.append("used_outside", formData.used_outside || "");
+    form.append("used_outside", formData.used_outside);
     form.append("width", formData.width);
     form.append("height", formData.height);
-    form.append("radius", formData.radius);
     form.append("article", formData.article);
+    form.append("radius", formData.radius);
     form.append("color", formData.color);
     form.append("shape", formData.shape);
+    form.append("only_under_cover", formData.only_under_cover);
+    form.append("journalish", formData.journalish);
+    form.append("bar_and_cocktailish", formData.bar_and_cocktailish);
+    form.append("standard", formData.standard);
+    form.append("folding_furniture", formData.folding_furniture);
+    form.append("led_furniture", formData.led_furniture);
 
+    // console.log(form)
     try {
-      const res = await axios.post("https://rentback-0v37.onrender.com/api/products", form, {
+      const res = await axios.post("http://localhost:8000/api/products", form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -106,19 +135,21 @@ const AddAdminProduct = () => {
         price: null,
         stock: null,
         category: "",
-        image1: null,
-        image2: null,
-        image3: null,
-        image4: null,
         used_outside: null,
         width: "",
         height: "",
         radius: "",
         color: "",
         shape: "Круг",
+        only_under_cover: null,
+        bar_and_cocktailish: false,
+        standard: false,
+        journalish: false,
+        folding_furniture: false,
+        led_furniture: false,
       });
     } catch (err) {
-      console.error(err);
+      console.log(err);
       toast.error("Ошибка при добавлении продукта!");
     }
     setLoading(false);
@@ -126,7 +157,7 @@ const AddAdminProduct = () => {
 
   return (
     <div className="w-full min-h-[80vh]">
-      <div className="md:min-w-[960px] mx-auto px-4 pt-8 bg-white rounded-xl space-y-4">
+      <div className="md:min-w-[960px] mx-auto px-4 py-8 bg-white rounded-xl space-y-4">
         <h2 className="md:text-3xl text-xl mb-8 font-semibold">
           Добавить новый продукт
         </h2>
@@ -150,7 +181,7 @@ const AddAdminProduct = () => {
           <input
             type="number"
             name="stock"
-            placeholder="Цена со второго дня"
+            placeholder="Акция"
             className="input-style md:py-3 py-2 px-5 rounded-md border-2 border-[#4a6cc9] focus:border-[#60a5fa] w-full"
             value={formData.stock}
             onChange={handleChange}
@@ -181,12 +212,21 @@ const AddAdminProduct = () => {
           />
           <input
             type="text"
+            name="article"
+            placeholder="Артикул"
+            className="input-style py-2 px-5 rounded-md border-2 border-[#4a6cc9]"
+            value={formData.article}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
             name="color"
             placeholder="Цвет продукта"
             className="input-style py-2 px-5 rounded-md border-2 border-[#4a6cc9]"
             value={formData.color}
             onChange={handleChange}
           />
+
           <select
             name="shape"
             onChange={handleChange}
@@ -204,13 +244,6 @@ const AddAdminProduct = () => {
             value={formData.description}
             onChange={handleChange}
           />
-          <textarea
-            name="article"
-            placeholder="Артикул"
-            className="input-style h-32 py-2 md:py-3 px-5 rounded-md border-2 border-[#4a6cc9] focus:border-[#60a5fa] w-full"
-            value={formData.article}
-            onChange={handleChange}
-          />
         </div>
 
         <div className="flex h-auto items-center">
@@ -222,7 +255,7 @@ const AddAdminProduct = () => {
               <input
                 type="radio"
                 name="used_outside"
-                value="true"
+                value={formData.used_outside}
                 checked={formData.used_outside === true}
                 onChange={handleChange}
               />{" "}
@@ -232,7 +265,7 @@ const AddAdminProduct = () => {
               <input
                 type="radio"
                 name="used_outside"
-                value="false"
+                value={!formData.used_outside}
                 checked={formData.used_outside === false}
                 onChange={handleChange}
               />{" "}
@@ -241,37 +274,96 @@ const AddAdminProduct = () => {
           </div>
         </div>
 
-        <label className="md:text-xl text-md flex flex-col gap-y-4 font-semibold">
-          Загрузить изображения продукта:
-          <input
-            type="file"
-            accept="image/*"
-            name="image1"
-            onChange={handleChange}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-          />
-          <input
-            type="file"
-            accept="image/*"
-            name="image2"
-            onChange={handleChange}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-          />
-          <input
-            type="file"
-            accept="image/*"
-            name="image3"
-            onChange={handleChange}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-          />
-          <input
-            type="file"
-            accept="image/*"
-            name="image4"
-            onChange={handleChange}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-          />
-        </label>
+        <div>
+          <label className="mr-4">
+            <input
+              type="radio"
+              name="only_under_cover"
+              value={true}
+              // checked={formData.only_under_cover}
+              onChange={handleChange}
+            />{" "}
+            На улице, только под навесом
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="only_under_cover"
+              value={false}
+              // checked={formData.only_under_cover}
+              onChange={handleChange}
+            />{" "}
+            На улице без навеса
+          </label>
+        </div>
+
+        {/* Checkboxes */}
+        <div className="space-y-2">
+          <label>
+            <input
+              type="checkbox"
+              name="journalish"
+              checked={formData.journalish}
+              onChange={handleChange}
+            />{" "}
+            Журнальные
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="bar_and_cocktailish"
+              checked={formData.bar_and_cocktailish}
+              onChange={handleChange}
+            />{" "}
+            Барные и коктейльные
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="standard"
+              checked={formData.standard}
+              onChange={handleChange}
+            />{" "}
+            Стандартые
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="folding_furniture"
+              checked={formData.folding_furniture}
+              onChange={handleChange}
+            />{" "}
+            Складная мебель
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="led_furniture"
+              checked={formData.led_furniture}
+              onChange={handleChange}
+            />{" "}
+            LED мебель
+          </label>
+        </div>
+
+        {fileInputs.map((id) => (
+          <div key={id}>
+            <input
+              type="file"
+              onChange={(e) =>
+                handleFileChange(id, e.target.files?.[0] || null)
+              }
+            />
+          </div>
+        ))}
+
+        <button
+          type="button"
+          onClick={addFileInput}
+          className="bg-blue-500 text-white px-3 py-1 rounded"
+        >
+          + Add Image
+        </button>
 
         <label className="flex items-center gap-x-5 w-[330px] md:w-[400px]">
           <p className="md:text-xl text-md font-semibold">
@@ -301,6 +393,7 @@ const AddAdminProduct = () => {
             <option>Техника</option>
             <option>Хранение</option>
             <option>Текстиль</option>
+            <option>Растения</option>
           </select>
         </label>
 

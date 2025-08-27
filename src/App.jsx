@@ -2,14 +2,9 @@ import React from 'react'
 import { createBrowserRouter,Route,RouterProvider } from 'react-router-dom'
 import Mainlayout from './layout/Mainlayout'
 // import Router from 'express/lib/router'
-import Home from './pages/Home'
-import Rabot from './pages/Products'
-import Amstersam from './pages/Amstersam'
-import Korzina from './pages/Korzina'
+import {AddAdminProduct,Amstersam,Home,Korzina,Product,Products,Allproducts, EditProduct} from './pages/index'
 // import Catalog from './pages/Catalog'
-import AddAdminProduct from './pages/AddAdminProduct'
 import { ToastContainer } from 'react-toastify'
-import Product from './pages/Product'
 const App = () => {
   const router=createBrowserRouter([
     {
@@ -22,7 +17,7 @@ const App = () => {
        },
         {
          path:'/rabotaem',
-         element:<Rabot/>
+         element:<Products/>
         },
         {
           path:'/amstersam/:id',
@@ -33,8 +28,16 @@ const App = () => {
           element:<Korzina/>
         },
         {
+          path:"/edit" ,
+          element:<EditProduct />
+        },
+        {
           path:'/admin',
           element:<AddAdminProduct/>
+        },
+        {
+          path:'allProducts',
+          element:<Allproducts/>
         },
         {
           path:'/product/:id',

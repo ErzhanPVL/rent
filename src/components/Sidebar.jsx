@@ -37,6 +37,7 @@ const Sidebar = () => {
     { name: "Техника", img: "14.svg" },
     { name: "Хранение", img: "15.svg" },
     { name: "Текстиль", img: "16.svg" },
+    {name: "Растения", img: "rasteniya.svg"}
   ];
 
   return (

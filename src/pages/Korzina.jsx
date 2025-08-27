@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { arr } from '../constans';
+import CustomDatePicker from '../components/CustomDatePicker';
+import OrderData from '../components/OrderData';
 function Korzina() {
-  const [data,setData]=useState(arr)
+  const [data,setData]=useState([])
+  console.log(data);
+
   const increment = (id) => {
     setData(
       data.map((item) =>
@@ -20,8 +24,18 @@ function Korzina() {
   };
 
   const removeItem = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    const updated = [...data].filter((item) => item.id !== id) 
+    setData(updated);
+    sessionStorage.setItem("cart", JSON.stringify(updated))
   };
+
+  useEffect(() => {
+    const productsInBasket = JSON.parse(sessionStorage.getItem('cart'));
+
+    setData(productsInBasket?.length ? productsInBasket : [])
+  }, [])
+ 
+ 
   return (
     <div className='mt-10 w-[1290px] px-5'>
         <p className='text-[#1A1A1A80] opacity-50  text-[12px] font-normal mb-8'>Главная  •  Корзина</p>
@@ -30,18 +44,18 @@ function Korzina() {
             <div className='lg:max-w-[689px] md:max-w-[500px] max-w-[370px]'>
                {data.map((item)=>{
                   return <div key={item.id} className='md:max-w-[689px] flex gap-6 items-center mb-16'>
-                    <img src={item.url} alt="" className='md:w-[88px] md:h-[93px]' />
+                    <img src={item.image} alt="" className='md:w-[88px] md:h-[93px]' />
                     <div className='w-full'>
                         <div className='flex justify-between items-start'>
                           <div>
-                            <p className='text-[#161616] font-bold text-[12px] md:text-[16px] mb-1'>{item.title}</p>
-                            <p className='text-[#1A1A1A] font-normal text-[12px] mb-[11px]'>{item.text}</p>
+                            <p className='text-[#161616] font-bold text-[12px] md:text-[16px] mb-1'>{item.name}</p>
+                            <p className='text-[#1A1A1A] font-normal text-[12px] mb-[11px]'>Арт.: 0046</p>
                           </div>
                           <img src="./korzina/delete.svg" alt="" className='cursor-pointer' onClick={() => removeItem(item.id)} />
                         </div>
                        <div className='w-full flex md:flex-row flex-col items-center justify-between'>
                          <div className='flex md:oreder-2 order-1 gap-2 items-center'>
-                         <p>{item.price}</p>
+                         <p>{item.price} ₽</p>
                          <p className='flex w-[182px] bg-[#F9F9F9] rounded-[4px] justify-center h-8 items-center '>
                             <p>
                               <span className='text-[12px] font-bold'>{item.key1}</span>
@@ -97,134 +111,9 @@ function Korzina() {
             </div>
             
         </div>
-        <p className='text-[#161616] text-lg md:text-[32px] font-bold mb-7'>Оформление заказа</p>
-        <p className='text-[#161616] text-sm md:text-[16px] font-bold mb-6'>Дата начала и окончания аренды<span className='text-[#FC4068] font-bold'>*</span></p>
+      <OrderData data={data}/>
 
-        <div className='flex md:flex-row flex-col justify-self-start gap-y-2 items-center gap-4 mb-4'>
-            <div className='w-[328px] border border-gray-400 rounded-[4px] h-14 px-4 flex items-center justify-between'>
-               <p className='text-[16px]'>с 24 марта</p>
-               <img src="./navbarimages/bottom.svg" alt="" />
-            </div>
-            <div className='w-[328px] border h-14 border-gray-400 rounded-[4px]  px-4 flex items-center justify-between'>
-               <p className='text-[16px]'>с 24 марта</p>
-               <img src="./navbarimages/bottom.svg" alt="" className='w-3' />
-            </div>
-        </div>
-        <p className='text-[#1A1A1A80]  text-[12px] font-normal mb-6'>Для аренды более, чем на 14 дней, <br className='block md:hidden' /> напишите нам на почту: order@test.ru</p>
-        
-        <div className='w-full md:flex block items-center gap-4 mb-14'>
-           <div>
-              <p className='text-[12px] font-bold mb-2'>Время начала монтажа:</p>
-              <p className='flex items-center'>
-                <span className='w-[115px] h-[1px] bg-[#C4C4C4]'></span>
-                <span className='w-14 h-8 border flex items-center justify-center rounded-sm border-[#8759F2] text-[#8759F2]'>08:00</span>
-                <span className='w-[160px] h-[1px] bg-[#C4C4C4]'></span>
-              </p>
-           </div>
-           <div>
-              <p className='text-[12px] font-bold mb-2'>Время начала монтажа:</p>
-              <p className='flex items-center'>
-                <span className='w-14 h-8 border flex items-center justify-center rounded-sm border-[#C4C4C4] text-[#C4C4C4]'>06:00</span>
-                <span className='w-[275px] h-[1px] bg-[#C4C4C4]'></span>
-              </p>
-           </div>
-        </div>
-
-        <p className='text-[#161616] text-[16px] font-bold mb-6'>Данные арендатора</p>
-
-        <div className=' flex md:flex-row flex-col justify-self-start items-center gap-4 mb-8'>
-            <div className='w-[328px] border border-gray-400 rounded-[4px] h-14 px-4 flex items-center justify-between'>
-               <p className='text-[16px]'>
-                <span className='text-[12px]'>Имя</span> <br />
-                <span>Константин</span>
-               </p>
-               
-            </div>
-            <div className='w-[328px] border h-14 border-gray-400 rounded-[4px]  px-4 flex items-center justify-between'>
-              <p className='text-[#161616] text-[16px] font-normal'>Дата начала и окончания аренды<span className='text-[#FC4068] font-bold'>*</span></p>
-             
-            </div>
-        </div>
-        <div className='flex md:flex-row flex-col justify-self-start items-center gap-4 mb-8'>
-            
-            <div className='w-[328px] border h-14 border-[#FC3172] rounded-[4px]  px-4 flex items-center justify-between'>
-               <p className='text-[16px] text-[#FC3172]'>Укажите номер телефона</p>
-            </div>
-            <div className='w-[328px] border h-14 border-gray-400 rounded-[4px]  px-4 flex items-center justify-between'>
-              <p className='text-[#161616] text-[16px] font-normal'>E-mail<span className='text-[#FC4068] font-bold'>*</span></p>
-             
-            </div>
-        </div>
-
-        <div className='md:w-[670px] w-[350px] border border-[#8759F2] rounded-[4px] h-14 px-4 flex items-center justify-between mb-8'>
-               <p className='text-[16px]'>
-                <span className='text-[12px]'>Компания</span> <br />
-                <span>ГлобалАртс</span>
-               </p>
-            </div>
-
-        <div className='flex items-center gap- mb-14'>
-          <p className='text-[#161616] text-[16px] font-normal'>Тип налогообложения<span className='text-[#FC4068] font-bold'>*</span></p>
-          <div className='flex gap-4 items-center'>
-                 <div className='flex gap-2 items-center'>
-                   <input type="checkbox" name="" id="" className='w-5 h-5 rounded-full cursor-pointer' />
-                   <p className='text-[16px] text-[#161616] font-normal'>НДС</p>
-                 </div>
-                 <div className='flex gap-2 items-center'>
-                   <input type="checkbox" className='w-5 h-5 rounded-full cursor-pointer'  name="" id="" />
-                   <p className='text-[16px] text-[#161616] font-normal'>УСН</p>
-                 </div>
-               </div>
-        </div>
-
-        <p className='text-[#161616] text-[16px] font-bold mb-6'>Данные объекта</p>
-        <div className='md:w-[670px] w-[350px] border border-[#1A1A1A80] rounded-[4px] h-14 px-4 flex items-center justify-between mb-8'>
-               <p className='text-[16px]'>
-                <span>Адрес объекта</span>
-               </p>
-            </div>
-
-          <div className='flex md:flex-row flex-col justify-self-start w-[350px] md:w-[670px]  items-center justify-between mb-14 '>
-            <div className='flex gap-8 mb-4 max-w-[328px]'>
-              <div><input type="checkbox" name="" className='mr-4' id="" /></div>
-              <div>
-              <p className='md:text-[12px] text-[10px]'>Требуется подъем
-              или <br /> нужно пронести более 100 м</p>
-              <p className='text-[10px]'>Уважаемый Клиент, расчет стоимости доставки и погрузо-разгрузочных работ производится через менеджера. Благодарим за понимание.</p>
-              </div>
-            </div>
-            <div>
-              <p className='text-[#161616] font-bold text-[12px]'>Время готовности
-              площадки:</p>
-              <div>
-              <p className='text-[12px] font-bold mb-2'>Время начала монтажа:</p>
-              <p className='flex items-center'>
-                <span className='w-14 h-8 border flex items-center justify-center rounded-sm border-[#C4C4C4] text-[#C4C4C4]'>06:00</span>
-                <span className='w-[275px] h-[1px] bg-[#C4C4C4]'></span>
-              </p>
-           </div>
-            </div>
-          </div>
-  
-          <p className='text-[#161616] text-[16px] font-bold mb-6'>Комментарий</p>
-          <textarea className='md:w-[680px] w-[350px] border border-[#1A1A1A80] rounded-[4px] px-4 flex items-center justify-between h-[117px] mb-14'>
-          </textarea>
-          <div className='md:w-[680px] w-[350px] bg-[#161616] h-[1px] mb-8'>
-          </div>
-          <div className='flex md:flex-row flex-col justify-self-start max-w-[680px] justify-between items-start mb-6 md:mb-24'>
-            <div className='max-w-[328px]'>
-                <p className=' text-[16px] font-bold text-[#161616]'>Итого</p>
-                <p className=' text-lg md:text-[32px] font-bold text-[#161616] mb-2'>999000 ₽</p>
-                <p className='text-[#161616] text-[12px] font-normal leading-4 mb-6'>Расчет стоимости не подразумевает наличие товара. Товар будет оперативно предоставлен менеджерами после оформления заказа</p>
-            </div>
-            <div className='max-w-[328px] '>
-               <div className="text-white flex font-bold justify-center items-center w-[208px] h-10 bg-[url('./korzina/taped.svg')] bg-cover">Арендовать</div>
-               <p className='w-[213px] text-[10px] mt-8 text-[#000000] opacity-50'>Нажимая кнопку отправить, вы соглашаетесь с политикой обработки персональных данных</p>
-            </div>
-          </div>
-      
-
-          <p className='text-[#161616] text-[22px] font-bold mb-6'>Вам может подойти</p>
+        <p className='text-[#161616] text-[22px] font-bold mb-6'>Вам может подойти</p>
 
           
           <div className='lg:grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 max-w-[400px] justify-self-start lg:max-w-[1000px] mb-6 lg:mb-16 md:mr-96'>
@@ -284,10 +173,6 @@ function Korzina() {
                  <p className='font-normal text-[12px] mb-9'>1500 ₽ со второго дня</p>
             </div> 
        </div>
-
-  
-
-
        <p className='text-[#161616] text-lg md:text-[22px] font-bold mb-3 md:mb-6'>Условия доставки</p>
        <p className='md:text-[16px] text-sm mb-6 md:mb-24 max-w-[320px] md:max-w-[500px] lg:max-w-[1000px] text-justify'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
        <p className='text-[#161616] text-lg md:text-[22px] font-bold mb-6'>Аренда мебели</p>

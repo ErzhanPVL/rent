@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,46 +7,59 @@ import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { useParams } from "react-router-dom";
 import { ProductsContext } from "../context/ProductContext";
-// import img from ""
-// const carouselImages = [
-//   "/stol/stol1.svg",
-//   "/stol/stol2.svg",
-//   "/stol/stol3.svg",
-//   "/stol/stol4.svg",
-// ];
+import counterStore from "../store/store";
+import { formatId } from "../utils/util";
 
 const Amstersam = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { id } = useParams();
+  const { products } = useContext(ProductsContext);
+  const product = products.find((item) => item.id.toString() === id);
 
-  
+  const [activeImg, setActiveImg] = useState()
+
+  useEffect(() => {
+    if (products?.length) {
+
+      setActiveImg(product.images[0]?.url)
+    }
+  }, [products])
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % product?.images.length);
+    // setActiveImg(product.images[currentIndex])
   };
 
   const handlePrev = () => {
     setCurrentIndex(
       (prevIndex) =>
-        (prevIndex - 1 + carouselImages.length) % carouselImages.length
+        (prevIndex - 1 + product?.images?.length) % product?.images?.length
     );
   };
 
-  const { id } = useParams();
-  const {products} = useContext(ProductsContext);
-  const product = products.find((item) => item.id.toString() === id);
+  useEffect(() => {
+    if (products?.length) {
 
-  const carouselImages = [
-    product?.image,
-    product?.image_other_1,
-    product?.image_other_2,
-    product?.image_other_3,
-    // "/amstersam/img5.svg",
-  ];
+      setActiveImg(product.images[currentIndex].url)
+    }
+  }, [currentIndex])
 
-  console.log(product);
+  const handleAddToCard = () => {
+    counterStore.increment()
+    const existingProducts = JSON.parse(sessionStorage.getItem("cart"));
+    if (existingProducts?.length){ 
+      existingProducts.push(product)
+      sessionStorage.setItem("cart", JSON.stringify(existingProducts))
+    }else{
+      sessionStorage.setItem("cart", JSON.stringify([product]))
+    }
+  }
+
   if (!product) {
     return <p className="p-4 text-red-600">Товар не найден</p>;
   }
+
+  // console.log(product)
 
   return (
     <div className="mt-10 lg:px-0 px-6">
@@ -58,7 +71,7 @@ const Amstersam = () => {
         {product.name}
       </h3>
       <div className="flex items-center justify-between lg:justify-start lg:gap-6 mb-6">
-        <p className="text-[16px] font-normal text-[#1A1A1A]">Арт.: 0046</p>
+        <p className="text-[16px] font-normal text-[#1A1A1A]">Арт.: {product.article}</p>
         <div className="flex gap-4 lg:hidden">
           <img src="/stol/heartz.svg" alt="" className="w-[18px] h-4" />
           <img src="/stol/share.svg" alt="" className="w-[18px] h-4" />
@@ -80,7 +93,7 @@ const Amstersam = () => {
         <div className="lg:flex block flex-col relative w-full lg:w-[50%] items-center">
           <div
             className="lg:w-[470px] w-[300px] mx-auto h-[300px] lg:h-[500px] bg-cover bg-center rounded-sm shadow-sm"
-            style={{ backgroundImage: `url(${product.image})` }}
+            style={{ backgroundImage: `url(${activeImg})` }}
           ></div>
           <div className="lg:flex hidden items-center absolute top-64 z-20 w-[86%] justify-between">
             <span
@@ -98,7 +111,7 @@ const Amstersam = () => {
           </div>
           <div className="flex gap-2 absolute bottom-4 left-1/2 transform -translate-x-1/2  md:top-96 mt-4">
             <div className="flex gap-2 text-center  justify-center mx-auto md:hidden">
-              {carouselImages.map((_, index) => (
+              {product?.images.map((_, index) => (
                 <div
                   key={index}
                   className={`w-3 h-3  rounded-full cursor-pointer transition-all duration-300 ${
@@ -110,20 +123,21 @@ const Amstersam = () => {
             </div>
 
             <div className="hidden md:flex gap-2">
-              {carouselImages.map((img, index) => {
-                if (!img) return <></>
-                return(
-                <button
-                  key={index}
-                  className={`w-14 h-14 bg-cover bg-center border-2 rounded-md ${
-                    currentIndex === index
-                      ? "border-blue-500"
-                      : "border-gray-300"
-                  }`}
-                  style={{ backgroundImage: `url(${img})` }}
-                  onClick={() => setCurrentIndex(index)}
-                ></button>
-              )})}
+              {product?.images.map((img, index) => {
+                if (!img) return <></>;
+                return (
+                  <button
+                    key={index}
+                    className={`w-14 h-14 bg-cover bg-center border-2 rounded-md ${
+                      currentIndex === index
+                        ? "border-blue-500"
+                        : "border-gray-300"
+                    }`}
+                    style={{ backgroundImage: `url(${img.url})` }}
+                    onClick={() => setCurrentIndex(index)}
+                  ></button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -156,7 +170,7 @@ const Amstersam = () => {
           <p className="text-[#1A1A1A] font-bold text-[16px] mt-6 lg:mt-0 mb-6">
             Свойства товара
           </p>
-          <div className="lg:flex block gap-14 items-start mb-13">
+          <div className="lg:flex block gap-14 items-start ">
             <div className="lg:flex grid grid-cols-2 flex-col space-y-2 mb-6 lg:mb-0">
               <div className="flex items-center gap-4">
                 <img
@@ -193,47 +207,44 @@ const Amstersam = () => {
               <img
                 src="/amstersam/card1.svg"
                 alt=""
-                className="w-[54px] h-[54px]"
+                className={`w-[54px] h-[54px] ${product.only_under_cover ? "" : "opacity-30"}`}
               />
               <img
                 src="/amstersam/card2.svg"
                 alt=""
-                className="w-[54px] h-[54px]"
+                className={`w-[54px] h-[54px] ${product.only_under_cover ? "opacity-30" : ""}`}
               />
               <img
                 src="/amstersam/card3.svg"
                 alt=""
-                className="w-[54px] h-[54px]"
+                className={`w-[54px] h-[54px] ${product.journalish ? "" : "opacity-30"}`}
               />
               <img
                 src="/amstersam/card4.svg"
                 alt=""
-                className="w-[54px] h-[54px]"
+                className={`w-[54px] h-[54px] ${product.bar_and_cocktailish ? "" : "opacity-30"}`}
               />
               <img
                 src="/amstersam/card5.svg"
                 alt=""
-                className="w-[54px] h-[54px]"
+                className={`w-[54px] h-[54px] ${product.standard ? "" : "opacity-30"}`}
               />
               <img
-                src="/amstersam/card6.svg"
+                src="/stol/folding.svg"
                 alt=""
-                className="w-[54px] h-[54px]"
+                className={`w-[54px] h-[54px] ${product.folding_furniture ? "" : "opacity-30"}`}
               />
               <img
-                src="/amstersam/card7.svg"
+                src="/stol/led.svg"
                 alt=""
-                className="w-[54px] h-[54px]"
-              />
-              <img
-                src="/amstersam/card8.svg"
-                alt=""
-                className="w-[54px] h-[54px]"
+                className={`w-[54px] h-[54px] ${product.led_furniture ? "" : "opacity-30"}`}
               />
             </div>
           </div>
 
-          <p className="text-[#1A1A1A] hidden lg:block font-bold text-[16px] mb-2">
+          <p className="mb-13 mt-4">Цвет: {product.color}</p>
+
+          {/* <p className="text-[#1A1A1A] hidden lg:block font-bold text-[16px] mb-2">
             Другие цвета
           </p>
           <div className="lg:flex hidden items-center gap-x-2 mb-4">
@@ -246,7 +257,7 @@ const Amstersam = () => {
             <span className="w-12 h-12 bg-[#F9F9F9] flex justify-center rounded-[8px] cursor-pointer">
               <img src="/home/right.svg" className="w-3" alt="" />
             </span>
-          </div>
+          </div> */}
 
           <div className="lg:flex gap-x-4 hidden items-center">
             <p className="text-[#1A1A1A] font-bold text-[32px]">
@@ -260,7 +271,10 @@ const Amstersam = () => {
           </p>
 
           <div className="lg:flex hidden gap-6 items-center">
-            <button className="w-[223px] h-10 text-[#1A1A1A] flex justify-center items-center text-sm font-bold border-2 border-[#1A1A1A] runded-[4px]">
+            <button
+              onClick={handleAddToCard}
+              className="w-[223px] cursor-pointer h-10 text-[#1A1A1A] flex justify-center items-center text-sm font-bold border-2 border-[#1A1A1A] runded-[4px]"
+            >
               Арендовать
             </button>
             <div>
@@ -301,10 +315,10 @@ const Amstersam = () => {
           modules={[Navigation, Autoplay]}
           className="w-full h-[136px]"
         >
-          {carouselImages.map((src, index) => (
+          {product?.images.map((src, index) => (
             <SwiperSlide key={index}>
               <img
-                src={src}
+                src={src.url}
                 alt={`Slide ${index + 1}`}
                 className="w-full h-full object-cover rounded-lg"
               />

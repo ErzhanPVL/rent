@@ -1,0 +1,8 @@
+export {default as Home} from './Home'
+export {default as AddAdminProduct} from './AddAdminProduct'
+export {default as Amstersam} from './Amstersam'
+export {default as Korzina} from './Korzina'
+export {default as Product} from './Product'
+export {default as Products} from './Products'
+export {default as Allproducts} from './Allproducts'
+export {default as EditProduct} from './EditProduct'
